@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
-docker tag $IMAGE_NAME $DOCKER_REPO:${$SOURCE_COMMIT:0:8}
-docker push $DOCKER_REPO:${$SOURCE_COMMIT:0:8}
+TAG=${echo -n $SOURCE_COMMIT} | cut -c1-8
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$TAG
+docker push $DOCKER_REPO:$TAG

@@ -8,9 +8,12 @@ from flask import request, abort
 @app.route('/<webhook_name>/<webhook_key>')
 def index(webhook_name, webhook_key):
     if config.webhooks[webhook_name] is None:
+        print("Invalid wehbook name")
         abort(403)
     wh_config = config.webhooks[webhook_name]
     if not wh_config.is_key_valid(webhook_key):
+        print(f"Invalid webhook key: {webhook_key}")
+        print(f"Expected key: {wh_config._raw_config['key']}")
         abort(403)
     rq_json = request.get_json()
     print(rq_json)

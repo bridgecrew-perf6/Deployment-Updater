@@ -2,7 +2,7 @@ from updater.config import webhook_config
 from . import app
 from . import config
 from flask import request, abort
-from . import kube
+# from . import kube
 
 
 @app.route('/<webhook_name>/<webhook_key>')
@@ -14,4 +14,5 @@ def index(webhook_name, webhook_key):
         abort(403)
     rq_json = request.get_json()
     print(rq_json)
-    return f"{kube.get_pods()}"
+    # return f"{kube.get_pods()}"
+    return "Pogging"

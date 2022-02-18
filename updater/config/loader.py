@@ -26,10 +26,13 @@ class ConfigLoader:
     def _worker(self):
         while self.running:
             for file in self.config_path.iterdir():
+                if not file.is_file():
+                    continue
                 if file.name not in self._webhooks:
                     self._webhooks[file.name] = WebhookConfig()
                 with file.open() as f:
                     self._webhooks[file.name]._raw_config = json.load(f)
+                self._webhooks[file.name]._raw_config["key"] = os.environ.get(file.name.upper().replace(".","_")+"_KEY", None)
                 sleep(1)
             sleep(60)
 

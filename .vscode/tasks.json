@@ -21,7 +21,8 @@
 			"dockerRun": {
 				"env": {
 					"FLASK_APP": "updater/__init__.py",
-					"WEBHOOK_CONFIG_PATH": "/app/example_configs"
+					"WEBHOOK_CONFIG_PATH": "/app/example_configs",
+					"BLOKEGAMING_COM_KEY": "value"
 				}
 			},
 			"python": {

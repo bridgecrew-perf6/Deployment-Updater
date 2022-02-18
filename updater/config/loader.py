@@ -36,7 +36,8 @@ class ConfigLoader:
                 if file.name not in self._webhooks:
                     self._webhooks[file.name] = WebhookConfig()
                 self._webhooks[file.name]._raw_config = raw_config
-                self._webhooks[file.name]._raw_config["key"] = os.environ.get(file.name.upper().replace(".","_")+"_KEY", None)
+                key  = os.environ.get(file.name.upper().replace(".","_")+"_KEY", "")
+                self._webhooks[file.name]._raw_config["key"] = key.strip().replace("\"", "")
                 sleep(1)
             sleep(60)
 

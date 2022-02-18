@@ -13,6 +13,8 @@ class WebhookConfig:
         if 'key' not in self._raw_config:
             return False
         the_key: str = self._raw_config['key']
+        if the_key is None:
+            return False
         match = True
         for i in range(len(the_key)):
             try:

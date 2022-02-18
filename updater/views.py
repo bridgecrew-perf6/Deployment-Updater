@@ -22,5 +22,5 @@ def index(webhook_name, webhook_key):
     rq_json = request.get_json()
     print(rq_json)
     if kube is not None:
-        return f"{kube.get_pods()}"
+        return f"{kube.get_deployments()}"
     return "Pogging"

@@ -1,7 +1,12 @@
 from kubernetes import client, config
 
 config.load_incluster_config()
-v1 = client.CoreV1Api()
+core = client.CoreV1Api()
+apps = client.AppsV1Api()
 
 def get_pods():
-    return v1.list_pod_for_all_namespaces(watch=False)
+    return core.list_pod_for_all_namespaces(watch=False)
+
+
+def get_deployments():
+    return apps.list_deployment_for_all_namespaces(watch=False)

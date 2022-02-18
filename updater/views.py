@@ -9,7 +9,7 @@ except ImportError:
     kube = None
 
 
-@app.route('/<webhook_name>/<webhook_key>')
+@app.route('/<webhook_name>/<webhook_key>', methods=['GET', 'POST'])
 def index(webhook_name, webhook_key):
     if config.webhooks[webhook_name] is None:
         print("Invalid wehbook name")

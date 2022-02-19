@@ -10,3 +10,7 @@ def get_pods():
 
 def get_deployments():
     return apps.list_deployment_for_all_namespaces(watch=False)
+
+
+def update_deployment_container_tag(namespace, deployment, tag):
+    return apps.list_namespaced_deployment(namespace, label_selector=deployment)

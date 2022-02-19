@@ -7,6 +7,7 @@ try:
     from . import kube
 except ImportError:
     kube = None
+import json
 
 
 @app.route('/<webhook_name>/<webhook_key>', methods=['POST'])
@@ -35,5 +36,5 @@ def index(webhook_name, webhook_key):
     if kube is not None:
         namespace = wh_config.cluster_namespace
         label = wh_config.cluster_deployment_label
-        return f"{kube.update_deployment_container_tag(namespace, label, rq_json['push_data']['tag'])}"
+        return json.dumps(kube.update_deployment_container_tag(namespace, label, rq_json['push_data']['tag']))
     return "Pogging"

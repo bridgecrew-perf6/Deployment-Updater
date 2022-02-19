@@ -13,4 +13,4 @@ def get_deployments():
 
 
 def update_deployment_container_tag(namespace, deployment, tag):
-    return apps.list_namespaced_deployment(namespace, label_selector=deployment)
+    return apps.list_namespaced_deployment(namespace)

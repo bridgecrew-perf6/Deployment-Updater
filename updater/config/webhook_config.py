@@ -22,3 +22,19 @@ class WebhookConfig:
             except IndexError:
                 match = False
         return match
+    
+    @property
+    def cluster_namespace(self):
+        if "cluster" not in self._raw_config:
+            return None
+        if "namespace" not in self._raw_config["cluster"]:
+            return None
+        return self._raw_config["cluster"]["namespace"]
+    
+    @property
+    def cluster_deployment_label(self):
+        if "cluster" not in self._raw_config:
+            return None
+        if "deployment_label" not in self._raw_config["cluster"]:
+            return None
+        return self._raw_config["cluster"]["deployment_label"]

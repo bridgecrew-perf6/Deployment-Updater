@@ -14,7 +14,7 @@ def index(webhook_name, webhook_key):
     if config.webhooks[webhook_name] is None:
         print("Invalid wehbook name")
         abort(403)
-    wh_config = config.webhooks[webhook_name]
+    wh_config: config.WebhookConfig = config.webhooks[webhook_name]
     if not wh_config.is_key_valid(webhook_key):
         print(f"Invalid webhook key: {webhook_key}")
         print(f"Expected key: {wh_config._raw_config['key']}")
@@ -33,7 +33,7 @@ def index(webhook_name, webhook_key):
         return "That's cool and all but I don't care"
     print(rq_json)
     if kube is not None:
-        namespace = wh_config["cluster"]["namespace"]
-        label = wh_config["cluster"]["deployment_label"]
+        namespace = wh_config.cluster_namespace
+        label = wh_config.cluster_deployment_label
         return f"{kube.update_deployment_container_tag(namespace, label, rq_json['push_data']['tag'])}"
     return "Pogging"

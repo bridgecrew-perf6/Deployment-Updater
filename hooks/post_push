@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-TAG=$(echo -n $SOURCE_COMMIT | sed 's/^\(........\).*/\1/')
-
-echo $TAG
-echo $DOCKER_REPO
-
-docker tag $IMAGE_NAME $DOCKER_REPO:$TAG
-docker push $DOCKER_REPO:$TAG

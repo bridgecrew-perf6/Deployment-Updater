@@ -30,11 +30,10 @@ def index(webhook_name, webhook_key):
     if "tag" not in rq_json["push_data"]:
         print("No tag found in push_data")
         abort(403)
-    if rq_json["push_data"]["tag"] == "latest":
+    if rq_json["push_data"]["tag"] != wh_config.cluster_tag:
         return "That's cool and all but I don't care"
-    print(rq_json)
     if kube is not None:
         namespace = wh_config.cluster_namespace
         label = wh_config.cluster_deployment_label
-        return json.dumps(kube.update_deployment_container_tag(namespace, label, rq_json['push_data']['tag']))
+        return f"{kube.restart_deployment(namespace, label)}"
     return "Pogging"

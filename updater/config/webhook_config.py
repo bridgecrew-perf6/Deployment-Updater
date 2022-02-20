@@ -38,3 +38,11 @@ class WebhookConfig:
         if "deployment_label" not in self._raw_config["cluster"]:
             return None
         return self._raw_config["cluster"]["deployment_label"]
+    
+    @property
+    def cluster_tag(self):
+        if "cluster" not in self._raw_config:
+            return "latest"
+        if "tag" not in self._raw_config["cluster"]:
+            return "latest"
+        return self._raw_config["cluster"]["tag"]

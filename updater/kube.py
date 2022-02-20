@@ -29,9 +29,9 @@ def get_deployments():
 
 def restart_deployment(namespace, deployment_name):
     deployments: List[V1Deployment] = apps.list_namespaced_deployment(namespace).items
+    i = _find_index(deployments, lambda x: x.metadata.name == deployment_name)
     if i is None:
         return None
-    i = _find_index(deployments, lambda x: x.metadata.name == deployment_name)
     deployment: V1Deployment = deployments[i]
     if deployment is None:
         return False

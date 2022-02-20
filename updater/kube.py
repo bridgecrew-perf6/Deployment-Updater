@@ -9,7 +9,7 @@ apps = client.AppsV1Api()
 
 
 def _find_index(items, filter):
-    if not isinstance(filter, function):
+    if not callable(filter):
         def _filter(item):
             return item == filter
     else:

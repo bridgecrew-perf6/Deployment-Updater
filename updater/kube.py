@@ -33,5 +33,7 @@ def restart_deployment(namespace, deployment_name):
     deployment: V1Deployment = deployments[i]
     if deployment is None:
         return False
+    if deployment.spec.template.metadata.annotations is None:
+        deployment.spec.template.metadata.annotations = {}
     deployment.spec.template.metadata.annotations["kubectl.kubernetes.io/restartedAt"] = datetime.datetime.utcnow().isoformat()
     return apps.patch_namespaced_deployment(deployment_name, namespace, body=deployment)
